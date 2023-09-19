@@ -47,9 +47,10 @@ def _generate_modified_content(original_file_path, modification_type, filename, 
             print(f"byte_flip: {filename=} {index=} {data=}")
         elif modification_type == 'appended':
             fou.seek(0, 2)
-            fou.write(_generate_random_bytes(random.randint(1024, 2048)))
+            new_size = int(random.uniform(input_size * 1.05, input_size * 1.15))  # + 5% - 15%
+            fou.write(_generate_random_bytes(new_size - input_size))
         elif modification_type == 'truncated':
-            new_size = max(random.randint(input_size - 1024, input_size), 1000)
+            new_size = int(random.uniform(input_size * 0.85, input_size * 0.95))  # - 5% - 15%
             fou.truncate(new_size)
 
 

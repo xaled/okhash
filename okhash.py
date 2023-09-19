@@ -188,7 +188,7 @@ def load_hash_files(filepath):
                 status_code = 1
 
         if not skip:
-            result.append((splits[0], splits[1]))
+            result.append((bytes.fromhex(splits[0]), splits[1]))
 
     return result
 
@@ -318,9 +318,9 @@ def main():
                     continue
 
                 try:
-                    calculated_hash = okhash_filepath(entry_filepath, K=args.K).hex()
+                    calculated_hash = okhash_filepath(entry_filepath, K=args.K)
 
-                    if calculated_hash == expected_hash:
+                    if compare_okhashes(expected_hash, calculated_hash):
                         _print_result(entry_filepath, 'OK')
                     else:
                         _print_result(entry_filepath, 'FAILED')
@@ -357,7 +357,6 @@ def main():
                     print(f"okhash.py: {filepath}: Permission denied", file=sys.stderr)
                     status_code = 1
                     continue
-
 
             print(f"{digest.hex()}  {filepath}", end='\x00' if args.zero else '\n')
 

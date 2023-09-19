@@ -1,7 +1,7 @@
 # O(K)hash
 
 ## Introduction
-**O(K)hash** (pronounced OK hash or oꭓash) is a hash function with $O(1)$ complexity based on SHA-256. It is designed to efficiently calculate hashes for large files by reading only a fixed subset of data from random positions within the file. The 'K' parameter denotes the strength of the hashing, with lower values reading less data. For example, a hash with K=1 reads only 1KB of data, while a hash with K=2 reads 1MB of data. The hash results are downgradable, meaning a hash of strength K=3 can validate a file hash calculated with K=1.
+**O(K)hash** (pronounced OK hash or oꭓash) is a hash function with $O(1)$ complexity based on SHA-256. It is designed to efficiently calculate hashes for large files by reading only a fixed subset of data from random positions within the file. The 'K' parameter denotes the strength of the hashing, with lower values reading less data. For example, a hash with K=1 reads only 1KiB of data, while a hash with K=2 reads 1MiB of data. The hash results are downgradable, meaning a hash of strength K=3 can validate a file hash calculated with K=1.
 
 ## Rational
 Calculating the hash of a large file normally involves reading the entire file, which can be time-consuming, especially with slow I/O operations. O(K)hash addresses this issue by reading a fixed number of bytes from random positions inside the file, providing a constant time complexity of $O(1)$. This approach generates a reliable fingerprint for identifying duplicate files and validating files efficiently.
